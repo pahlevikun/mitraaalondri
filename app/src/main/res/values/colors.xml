@@ -11,6 +11,8 @@
 
     <color name="colorButtonIntro">#d17d15</color>
 
+    <color name="colorButtonTolak">#c40303</color>
+
     <color name="colorText">#313131</color>
     <color name="colorText2">#616161</color>
     <color name="colorWhite">#ffffff</color>

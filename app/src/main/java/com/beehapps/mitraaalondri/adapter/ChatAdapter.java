@@ -9,10 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.waperr.aalaundry.R;
-import com.waperr.aalaundry.database.DatabaseHandler;
-import com.waperr.aalaundry.pojo.Chats;
-import com.waperr.aalaundry.pojo.Profil;
+import com.beehapps.mitraaalondri.R;
+import com.beehapps.mitraaalondri.database.DatabaseHandler;
+import com.beehapps.mitraaalondri.pojo.Chats;
+import com.beehapps.mitraaalondri.pojo.Profil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,6 +2,7 @@ package com.beehapps.mitraaalondri.main.handle_fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -28,6 +29,7 @@ import com.beehapps.mitraaalondri.config.PromoData;
 import com.beehapps.mitraaalondri.database.DatabaseHandler;
 import com.beehapps.mitraaalondri.main.handle_fragment.handle_main.OrderOfflineActivity;
 import com.beehapps.mitraaalondri.main.handle_fragment.handle_main.OrderOnlineActivity;
+import com.beehapps.mitraaalondri.main.handle_login.LoginActivity;
 import com.beehapps.mitraaalondri.pojo.Profil;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -42,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -230,6 +234,20 @@ public class MainFragment extends Fragment {
                     }else{
                         String message = jObj.getString("message");
                         Toast.makeText(getActivity(), ""+message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Failed getting user data, session end!", Toast.LENGTH_SHORT).show();
+                        dataSource.hapusDbaseProfil();
+
+                        SharedPreferences sharedPreferences =  getActivity().getSharedPreferences("DATA",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("session",false);
+                        editor.commit();
+
+                        dataSource.hapusDbaseProfil();
+
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        getActivity().finish();
                     }
 
                 } catch (JSONException e) {

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_londri_order_history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/listViewMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="@dimen/_1sdp"
+            android:divider="@drawable/bg_divider"/>
+        <LinearLayout
+            android:id="@+id/linLayBelumRiwayat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:src="@drawable/ic_antar_konfir"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/colorText"
+                android:text="Anda Belum Memiliki Riwayat Pesan"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
