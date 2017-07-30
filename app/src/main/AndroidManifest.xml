@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.beehapps.mitraaalondri">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateAlwaysHidden">
+        <activity
+            android:name=".main.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeOpen"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".main.handle_login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeOpen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".main.handle_login.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeOpen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".main.handle_login.ForgotActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeOpen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".main.handle_login.ForgotResetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeOpen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".main.handle_fragment.handle_main.OrderOfflineActivity" />
+        <activity android:name=".main.handle_fragment.handle_main.OrderOnlineActivity" />
+        <activity android:name=".main.handle_fragment.handle_main.OrderDetail"></activity>
+    </application>
+
+</manifest>

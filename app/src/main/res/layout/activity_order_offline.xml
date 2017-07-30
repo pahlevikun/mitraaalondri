@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.beehapps.mitraaalondri.main.handle_fragment.handle_main.OrderOfflineActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:inputType="textCapWords"
+                    android:hint="Masukan Nama"
+                    app:met_floatingLabelText="Nama"
+                    app:met_baseColor="@color/colorAccent"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/colorAccent"
+                    app:met_singleLineEllipsis="true"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:inputType="textCapWords"
+                    android:hint="Masukan Berat"
+                    app:met_floatingLabelText="Berat"
+                    app:met_helperText="Berat dalam kilogram"
+                    app:met_baseColor="@color/colorAccent"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/colorAccent"
+                    app:met_singleLineEllipsis="true"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:inputType="textCapWords"
+                    android:hint="Masukan Catatan"
+                    app:met_floatingLabelText="Catatan"
+                    app:met_helperText="Keterangan, misalkan baju luntur"
+                    app:met_baseColor="@color/colorAccent"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/colorAccent"
+                    app:met_singleLineEllipsis="true"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBack"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/_50sdp">
+
+        <ImageView
+            android:src="@drawable/logo"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_margin="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center"
+            android:textColor="@color/colorText2"
+            android:text="@string/loginSlogan"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:hintEnabled="false">
+            <EditText
+                android:id="@+id/editTextRegisterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="textCapWords"
+                android:padding="@dimen/_20sdp"
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/bg_edittext2"
+                android:textColorHint="@color/colorText2"
+                android:textColor="@color/colorText"
+                android:textColorHighlight="@color/colorText2"
+                android:drawableLeft="@drawable/ic_login_name"
+                android:drawablePadding="@dimen/_10sdp"
+                android:hint="Nama Lengkap" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:hintEnabled="false">
+            <EditText
+                android:id="@+id/editTextRegisterPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="phone"
+                android:padding="@dimen/_20sdp"
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/bg_edittext2"
+                android:textColorHint="@color/colorText2"
+                android:textColor="@color/colorText"
+                android:textColorHighlight="@color/colorText2"
+                android:drawableLeft="@drawable/ic_login_phone"
+                android:drawablePadding="@dimen/_10sdp"
+                android:hint="Nomor Telepon" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:hintEnabled="false">
+            <EditText
+                android:id="@+id/editTextRegisterEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_20sdp"
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/bg_edittext2"
+                android:textColorHint="@color/colorText2"
+                android:textColor="@color/colorText"
+                android:textColorHighlight="@color/colorText2"
+                android:drawableLeft="@drawable/ic_login_mail"
+                android:drawablePadding="@dimen/_10sdp"
+                android:hint="Email" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:hintEnabled="false">
+            <EditText
+                android:id="@+id/editTextRegisterPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:padding="@dimen/_20sdp"
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/bg_edittext2"
+                android:textColorHint="@color/colorText2"
+                android:textColor="@color/colorText"
+                android:textColorHighlight="@color/colorText2"
+                android:drawableLeft="@drawable/ic_login_password"
+                android:drawablePadding="@dimen/_10sdp"
+                android:hint="Kata Sandi"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorAccent" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/buttonRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:textSize="@dimen/_11sdp"
+            android:text="Masuk"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="true"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+</ScrollView>

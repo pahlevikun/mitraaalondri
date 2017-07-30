@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Mitra AA Londri</string>
+
+    <string name="loginSlogan">Rezeki Udah Ada Yang Ngatur,\nCucian Biar AA Yang Atur</string>
+    <string name="loginLupaPassword"><u>Lupa Password?</u></string>
+    <string name="loginAlternatif">Atau</string>
+    <string name="loginBuatAkun">Belum punya akun? <u>Daftar Sekarang</u></string>
+    <string name="loginForgot">Silahkan masukan email dan cek email Anda, kami akan mengirimkan email untuk merubah password Anda</string>
+
+    <string name="fragmentHomeText">Silahkan Pilih Tipe Londri</string>
+    <string name="londriKiloanText">*Tidak perlu khawatir jika berat yang Anda inputkan tidak sesuai ketika ditimbang oleh kurir AA Londri karena harga dan berat akan berubah ketika kurir AA Londri sudah memastikan berta londri Anda.</string>
+
+    <string name="landing_register">Belum memiliki akun? Daftar Sekarang!</string>
+    <string name="login_forgot">Lupa Kata Sandi?</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="faq1">AA Londri Adalah pelayanan cuci modern berbasis aplikasi online ASLI buatan anak bangsa.</string>
+    <string name="faq2">Setelah anda order melalui aplikasi , kami jemput cucian anda lalu kami antar setelah selesai.</string>
+    <string name="faq3">Tentu saja , outlet kami dalam waktu dekat tersebar diseluruh Indonesia.</string>
+    <string name="faq4">Kami akan ganti 10 kali harga cuci.</string>
+    <string name="faq5">Reguler
+        \nPelayanan pencucian dalam waktu tiga hari dengan harga standar.
+        \n\nEkspress
+        \nPelayanan pencucian khusus dalam satu hari selesai dengan penambahan ongkos 2x dari harga standar.
+        \n\nKilat
+        \nPelayanan dalam waktu yang sangat singkat ± 5 jam selesai dengan penambahan ongkos sekitar 4x dari harga standar.</string>
+    <string name="faq6">TIDAK, pakaian masing masing customer kami cuci secara terpisah.</string>
+    <string name="faq7">Kami akan jemput dan antar pakaian anda, anda cukup menghubungi kami melalui hotline, atau menu yang tersedia di aplikasi.</string>
+
+    <string name="aareguler">Pelayanan pencucian dalam waktu tiga hari dengan harga standar</string>
+    <string name="aaekspress">Pelayanan pencucian khusus dalam satu hari selesai dengan penambahan ongkos 2x dari harga standar</string>
+    <string name="aakilat">Pelayanan dalam waktu yang sangat singkat ± 5 jam selesai dengan penambahan ongkos sekitar 4x dari harga standar</string>
+
+    <string name="q1">Apa itu AA Londri?</string>
+    <string name="q2">Bagaimana cara kerjanya?</string>
+    <string name="q3">Apakah AA Londri memiliki outlet?</string>
+    <string name="q4">Bagaimana kalau pakaian saya rusak atau hilang?</string>
+    <string name="q5">Berapa lama waktu cuci Regular, Ekspress, dan Kilat?</string>
+    <string name="q6">Saat mencuci apakah Pakaian saya digabung dengan pakaian customer lain?</string>
+    <string name="q7">Bagaimana kalau pakaian kami tertukar?</string>
+
+    <string name="faq"><b>Apa itu AA Londri ?</b>
+        \nAA Londri Adalah pelayanan cuci modern berbasis aplikasi online ASLI buatan anak bangsa
+        \n\n<b>Bagaimana cara kerjanya ?</b>
+        \nSetelah anda order melalui aplikasi , kami jemput cucian anda lalu kami antar setelah selesai
+        \n\n<b>Apakah AA Londri memiliki outlet ?</b>
+        \nTentu saja , outlet kami dalam waktu dekat tersebar diseluruh Indonesia
+        \n\n<b>Bagaimana kalau pakaian saya rusak atau hilang ?</b>
+        \nKami akan ganti 10 kali harga cuci
+        \n\n<b>Berapa lama waktu cuci regular dan Express ?</b>
+        \nCuci regular adalah 3 x 24 Jam
+        \nCuci Express adalah 1 x 24 Jam
+        \n\n<b>Saat mencuci apakah Pakaian saya digabung dengan pakaian customer lain?</b>
+        \nTIDAK, pakaian anda kami cuci sesuai masing-masing konsumen
+        \n\n<b>Bagaimana kalau pakaian kami tertukar ?</b>
+        \nKami akan jemput dan antar pakaian anda, anda cukup menghubungi kami melalui hotline, atau menu yang tersedia di aplikasi
+    </string>
+</resources>

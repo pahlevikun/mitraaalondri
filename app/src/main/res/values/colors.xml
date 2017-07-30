@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#269743</color>
+    <color name="colorPrimaryDark">#258C37</color>
+    <color name="colorAccent">#53B335</color>
+
+
+    <color name="colorIntro1">#f2a426</color>
+    <color name="colorIntro2">#f89f1f</color>
+    <color name="colorIntro3">#f7961e</color>
+
+    <color name="colorButtonIntro">#d17d15</color>
+
+    <color name="colorText">#313131</color>
+    <color name="colorText2">#616161</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBack">#efefef</color>
+    <color name="colorBackDark">#c4c4c4</color>
+    <color name="colorGrey">#dedede</color>
+    <color name="colorGrey2">#b7b7b7</color>
+    <color name="colorTransparent">#00ffffff</color>
+
+    <color name="colorButtonLogin">#F89F1E</color>
+    <color name="colorButtonLoginDark">#f7871e</color>
+
+    <color name="colorButtonRegister">#ffffff</color>
+    <color name="colorButtonRegisterDark">#d2d2d2</color>
+</resources>
