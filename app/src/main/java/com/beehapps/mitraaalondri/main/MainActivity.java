@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.beehapps.mitraaalondri.R;
 import com.beehapps.mitraaalondri.main.handle_fragment.MainFragment;
+import com.beehapps.mitraaalondri.main.handle_fragment.MessageFragment;
+import com.beehapps.mitraaalondri.main.handle_fragment.OrderFragment;
 import com.beehapps.mitraaalondri.main.handle_fragment.ProfileFragment;
 import com.beehapps.mitraaalondri.main.handle_fragment.StatisticFragment;
 
@@ -77,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MainFragment(), "Beranda");
-        adapter.addFragment(new MainFragment(), "Order");
-        adapter.addFragment(new MainFragment(), "Pesan");
+        adapter.addFragment(new OrderFragment(), "Order");
+        adapter.addFragment(new MessageFragment(), "Pesan");
         adapter.addFragment(new StatisticFragment(), "Statistik");
         adapter.addFragment(new ProfileFragment(), "Profil");
         viewPager.setAdapter(adapter);

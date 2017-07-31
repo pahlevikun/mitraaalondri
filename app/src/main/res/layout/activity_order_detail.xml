@@ -53,7 +53,7 @@
                         android:layout_margin="@dimen/_10sdp"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/textViewWeightNamaKonfirmasi"
+                            android:id="@+id/textViewOrderNama"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Nama User"
@@ -61,7 +61,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_14sdp"/>
                         <TextView
-                            android:id="@+id/textViewWeightAlamatKonfirmasi"
+                            android:id="@+id/textViewOrderAlamat"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Alamat User"
@@ -103,7 +103,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_14sdp"/>
                         <TextView
-                            android:id="@+id/textViewWeightServiceKonfirmasi"
+                            android:id="@+id/textViewOrderLayanan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Londri by Weight (3 Kg)"
@@ -145,7 +145,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_14sdp"/>
                         <TextView
-                            android:id="@+id/textViewWeightPickupKonfirmasi"
+                            android:id="@+id/textViewOrderJemput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="26-12-2016 : 19.30 WIB"
@@ -187,7 +187,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_14sdp"/>
                         <TextView
-                            android:id="@+id/textVieWeightDeliveryKonfirmasi"
+                            android:id="@+id/textViewOrderAntar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="26-12-2016 : 19.30 WIB"

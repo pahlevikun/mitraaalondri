@@ -23,4 +23,7 @@ public class APIConfig {
 
     public static String API_CHAT_READ = "http://aalondri.com/api/v2/chat/read";
     public static String API_CHAT_SEND = "http://aalondri.com/api/v2/chat/send";
+
+
+    public static String API_CHANGE_ORDER_STATUS = "http://aalondri.com/api/v2/mitra/order/online/change";
 }

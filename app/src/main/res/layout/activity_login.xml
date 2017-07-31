@@ -81,7 +81,7 @@
             android:textAllCaps="true"
             android:background="@color/colorPrimary" />
 
-        <TextView
+        <!--TextView
             android:id="@+id/textViewLupaPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
             android:text="Daftar"
             android:textColor="@color/colorWhite"
             android:textAllCaps="true"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary" /-->
 
 
     </LinearLayout>
