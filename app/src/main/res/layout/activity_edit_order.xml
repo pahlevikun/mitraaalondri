@@ -180,20 +180,45 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btSetuju"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@color/colorPrimary"
+                    android:text="Ubah"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Total harga"
+                        android:textColor="@color/colorText"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <TextView
+                        android:id="@+id/textViewTotalHarga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="IDR 60000"
+                        android:textColor="@color/colorText"
+                        android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </android.support.v7.widget.CardView>
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btSetuju"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:text="Setuju"
-        android:textColor="@color/colorWhite"
-        android:textAllCaps="true"
-        android:background="@color/colorPrimary"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+
 </LinearLayout>

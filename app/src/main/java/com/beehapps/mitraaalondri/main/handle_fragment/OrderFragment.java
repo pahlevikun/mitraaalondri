@@ -92,6 +92,19 @@ public class OrderFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(getActivity(), OrderDetail.class);
+                intent.putExtra("user_id",dataList.get(position).getUser_id());
+                intent.putExtra("nama",dataList.get(position).getNama_alias());
+                intent.putExtra("nama_jalan",dataList.get(position).getNama_jalan());
+                intent.putExtra("alamat",dataList.get(position).getAlamat());
+                intent.putExtra("detail_lokasi",dataList.get(position).getDetail_lokasi());
+                intent.putExtra("invoice",dataList.get(position).getInvoice_number());
+                intent.putExtra("status",dataList.get(position).getStatus());
+                intent.putExtra("start_lat",dataList.get(position).getLat());
+                intent.putExtra("start_lng",dataList.get(position).getLng());
+                intent.putExtra("phone",dataList.get(position).getPhone_alias());
+                intent.putExtra("order_id",dataList.get(position).getIdOrder());
+                intent.putExtra("total_bayar",dataList.get(position).getTotalBayar());
+                intent.putExtra("berat",dataList.get(position).getBerat());
                 startActivity(intent);
             }
         });
@@ -131,6 +144,7 @@ public class OrderFragment extends Fragment {
                                 String nama_alias = users.getString("nama_alias");
                                 String phone_alias = users.getString("phone_alias");
                                 String invoice_number = users.getString("invoice_number");
+                                String berat = users.getString("berat");
                                 String total_harga = users.getString("total_harga");
                                 String detail_lokasi = users.getString("detail_lokasi");
                                 String catatan = users.getString("catatan");
@@ -147,7 +161,7 @@ public class OrderFragment extends Fragment {
                                 String lng = users.getString("longitude");
                                 dataList.add(new OrderFrag(i+"", id, user_id, kurir_id, mitra_id, nama_jalan, nama_alias, phone_alias, invoice_number,
                                         total_harga, detail_lokasi, catatan, alamat, is_ekspress, tanggal_mulai, tanggal_akhir, waktu_mulai, waktu_akhir, is_byitem,
-                                        status, totalBayar, lat, lng));
+                                        status, totalBayar, lat, lng,berat));
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();

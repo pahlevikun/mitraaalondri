@@ -15,7 +15,6 @@ public class APIConfig {
     public static String API_STAT_DASHBOARD = "http://aalondri.com/api/v2/report/search";
     public static String API_GET_ORDER_ONLINE = "http://aalondri.com/api/v2/mitra/order/online";
 
-
     public static String API_GET_HARGA_V2 = "http://aalondri.com/api/v2/service/show";
     public static String API_ORDER_V2 = "http://aalondri.com/api/v2/order/create";
     public static String API_HISTORY_V2 = "http://aalondri.com/api/v2/history/show";

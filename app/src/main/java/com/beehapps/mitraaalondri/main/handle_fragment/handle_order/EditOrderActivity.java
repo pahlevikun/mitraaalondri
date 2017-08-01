@@ -38,8 +38,8 @@ import java.util.Map;
 
 public class EditOrderActivity extends AppCompatActivity {
 
-    private String nama, alamat, berat, order_id, berat_baru, token;
-    private TextView tvNamaUser, tvAlamatUser, tvLayanan;
+    private String nama, alamat, berat, order_id, berat_baru, total_bayar, token, total_harga;
+    private TextView tvNamaUser, tvAlamatUser, tvLayanan, tvBayar;
     private EditText editBerat;
     private Button btSetujuU;
     private LinearLayout linBerat;
@@ -67,6 +67,7 @@ public class EditOrderActivity extends AppCompatActivity {
         linBerat = (LinearLayout) findViewById(R.id.linLayBerat);
         editBerat = (EditText) findViewById(R.id.etBerat);
         btSetujuU = (Button) findViewById(R.id.btSetuju);
+        tvBayar = (TextView) findViewById(R.id.textViewTotalHarga);
 
         dataSource = new DatabaseHandler(this);
         valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
@@ -76,7 +77,9 @@ public class EditOrderActivity extends AppCompatActivity {
         alamat = ambil.getStringExtra("alamat");
         berat = ambil.getStringExtra("berat");
         order_id = ambil.getStringExtra("order_id");
+        total_bayar = ambil.getStringExtra("total_bayar");
 
+        tvBayar.setText("IDR "+total_bayar);
         editBerat.setText(berat);
         tvNamaUser.setText(nama);
         tvAlamatUser.setText(alamat);
@@ -96,8 +99,6 @@ public class EditOrderActivity extends AppCompatActivity {
                 makeJsonObjectRequest();
             }
         });
-
-
 
     }
 
@@ -144,6 +145,7 @@ public class EditOrderActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("order_id", order_id);
                 params.put("berat", berat_baru);
+                params.put("total_harga", total_harga);
                 return params;
             }
 

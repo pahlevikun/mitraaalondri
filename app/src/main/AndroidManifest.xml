@@ -54,6 +54,7 @@
         <activity android:name=".main.handle_fragment.handle_main.OrderDetail" />
         <activity android:name=".main.handle_fragment.handle_order.OrderDetailTab"/>
         <activity android:name=".main.handle_fragment.handle_order.EditOrderActivity"/>
+        <activity android:name=".main.handle_fragment.handle_order.NavigasiActivity"/>
     </application>
 
 </manifest>

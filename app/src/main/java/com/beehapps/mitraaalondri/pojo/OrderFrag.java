@@ -8,7 +8,7 @@ public class OrderFrag {
 
     private String id, idOrder, user_id, kurir_id, mitra_id, nama_jalan, nama_alias, phone_alias, invoice_number,
             total_harga, detail_lokasi, catatan, alamat, is_ekspress, tanggal_mulai, tanggal_akhir,
-            waktu_mulai, waktu_akhir, is_byitem, status, totalBayar, lat, lng;
+            waktu_mulai, waktu_akhir, is_byitem, status, totalBayar, lat, lng, berat;
 
     public OrderFrag() {
     }
@@ -16,7 +16,7 @@ public class OrderFrag {
     public OrderFrag(String id, String idOrder, String user_id, String kurir_id, String mitra_id, String nama_jalan, String nama_alias, String phone_alias,
                      String invoice_number, String total_harga, String detail_lokasi, String catatan, String alamat, String is_ekspress,
                      String tanggal_mulai, String tanggal_akhir, String waktu_mulai, String waktu_akhir, String is_byitem,
-                     String status, String totalBayar, String lat, String lng) {
+                     String status, String totalBayar, String lat, String lng, String berat) {
         this.id = id;
         this.idOrder = idOrder;
         this.user_id = user_id;
@@ -40,6 +40,7 @@ public class OrderFrag {
         this.totalBayar = totalBayar;
         this.lat = lat;
         this.lng = lng;
+        this.berat = berat;
     }
 
     public String getId() {
@@ -224,5 +225,13 @@ public class OrderFrag {
 
     public void setLng(String lng) {
         this.lng = lng;
+    }
+
+    public String getBerat() {
+        return berat;
+    }
+
+    public void setBerat(String berat) {
+        this.berat = berat;
     }
 }
