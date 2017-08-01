@@ -20,6 +20,11 @@ public class APIConfig {
     public static String API_ORDER_V2 = "http://aalondri.com/api/v2/order/create";
     public static String API_HISTORY_V2 = "http://aalondri.com/api/v2/history/show";
 
+    public static String API_EDIT_ORDER = "http://aalondri.com/api/v2/mitra/order/online/update";
+
+
+    public static String API_ORDER_OFFLINE = "http://aalondri.com/api/v2/mitra/order/offline/create";
+
 
     public static String API_CHAT_READ = "http://aalondri.com/api/v2/chat/read";
     public static String API_CHAT_SEND = "http://aalondri.com/api/v2/chat/send";

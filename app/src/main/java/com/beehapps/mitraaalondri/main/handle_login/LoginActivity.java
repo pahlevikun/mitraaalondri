@@ -72,25 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.editTextEmail);
         etPassword = (EditText) findViewById(R.id.editTextPassword);
         btLogin = (Button) findViewById(R.id.buttonMasuk);
-        btDaftar = (Button) findViewById(R.id.buttonDaftar);
-        tvForgot = (TextView) findViewById(R.id.textViewLupaPassword);
 
-        tvForgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgotActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        btDaftar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override

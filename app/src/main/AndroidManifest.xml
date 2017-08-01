@@ -52,7 +52,8 @@
         <activity android:name=".main.handle_fragment.handle_main.OrderOfflineActivity" />
         <activity android:name=".main.handle_fragment.handle_main.OrderOnlineActivity" />
         <activity android:name=".main.handle_fragment.handle_main.OrderDetail" />
-        <activity android:name=".main.handle_fragment.handle_order.OrderDetailTab"></activity>
+        <activity android:name=".main.handle_fragment.handle_order.OrderDetailTab"/>
+        <activity android:name=".main.handle_fragment.handle_order.EditOrderActivity"/>
     </application>
 
 </manifest>
