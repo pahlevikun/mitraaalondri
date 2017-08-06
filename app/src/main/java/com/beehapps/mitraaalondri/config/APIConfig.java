@@ -14,6 +14,7 @@ public class APIConfig {
     public static String API_DASHBOARD = "http://aalondri.com/api/v2/mitra/dashboard";
     public static String API_STAT_DASHBOARD = "http://aalondri.com/api/v2/report/search";
     public static String API_GET_ORDER_ONLINE = "http://aalondri.com/api/v2/mitra/order/online";
+    public static String API_GET_ORDER = "http://aalondri.com/api/v2/mitra/order/online/all";
 
     public static String API_GET_HARGA_V2 = "http://aalondri.com/api/v2/service/show";
     public static String API_ORDER_V2 = "http://aalondri.com/api/v2/order/create";
@@ -30,4 +31,5 @@ public class APIConfig {
 
 
     public static String API_CHANGE_ORDER_STATUS = "http://aalondri.com/api/v2/mitra/order/online/change";
+    public static String API_CHANGE_ORDER_STATUS_DETAIL = "http://aalondri.com/api/kurir/changestatus";
 }

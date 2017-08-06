@@ -70,16 +70,16 @@ public class OrderFragmentAdapter extends BaseAdapter {
             layanan = "Kilat";
         }
 
-        tvInvoice.setText(": "+order.getInvoice_number());
-        tvName.setText(": "+order.getNama_alias());
-        tvType.setText(": "+layanan+"\n"+order.getAlamat()+", "+order.getDetail_lokasi()+"\n"+order.getPhone_alias());
-        tvJemput.setText(": "+order.getTanggal_mulai()+" "+order.getWaktu_mulai());
-        tvAntar.setText(": "+order.getTanggal_mulai()+" "+order.getWaktu_mulai());
-        tvBayar.setText(": IDR"+order.getPhone_alias());
-        if(order.getStatus().equals("3")){
-            tvStatus.setText(": Order Diterima");
+        tvInvoice.setText(order.getInvoice_number());
+        tvName.setText(order.getNama_alias());
+        tvType.setText(layanan+"\n"+order.getAlamat()+", "+order.getDetail_lokasi()+"\n"+order.getPhone_alias());
+        tvJemput.setText(order.getTanggal_mulai()+" "+order.getWaktu_mulai());
+        tvAntar.setText(order.getTanggal_mulai()+" "+order.getWaktu_mulai());
+        tvBayar.setText("IDR "+order.getTotal_harga());
+        if(order.getStatus().equals("2")){
+            tvStatus.setText("Order Ditolak");
         }else{
-            tvStatus.setText(": Sedang Dijemput");
+            tvStatus.setText("Order Diterima");
         }
 
         return convertView;

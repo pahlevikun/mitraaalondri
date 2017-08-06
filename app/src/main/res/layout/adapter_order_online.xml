@@ -54,6 +54,7 @@
                         android:textColor="@color/colorText2"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_weight="1"
                         android:text="Hari Ini Jam 09.00 - 10.00"/>
                     <TextView
                         android:id="@+id/tvPhone"

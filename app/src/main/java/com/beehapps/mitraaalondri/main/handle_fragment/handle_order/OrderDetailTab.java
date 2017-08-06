@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +46,8 @@ import java.util.Map;
 
 public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallback {
 
-    private String user_id, berat, total_bayar, order_id, nama,phone, namaJalan, invoice, status, startLat, startLng, token, kurir_id,mitra_id,detail_lokasi,alamat;
+    private String user_id, berat, total_bayar, order_id, nama,phone, namaJalan, invoice, startLat, startLng, 
+            token, kurir_id,mitra_id,detail_lokasi,alamat, status, statusDetail, orderPesan, jemput, antar, waktu;
     private int idkurir,idmitra;
     private TextView tvAlamatDetail, tvAlamat, tvNama, tvStatuss, tvJemput, tvAntar;
     private Button btHubungi, btNavigasi, btPesanan, btbtAmbilPesanan, btUbahStatus;
@@ -84,9 +86,20 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
         phone = ambil.getStringExtra("phone");
         berat = ambil.getStringExtra("berat");
         total_bayar = ambil.getStringExtra("total_bayar");
+        status = ambil.getStringExtra("status");
+        statusDetail = ambil.getStringExtra("statusDetail");
+        jemput = ambil.getStringExtra("tanggalMulai");
+        antar = ambil.getStringExtra("tanggalAKhir");
+        waktu = ambil.getStringExtra("waktu");
 
         dataSource = new DatabaseHandler(this);
         valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
+
+        for (Profil profil : valuesProfil){
+            token = profil.getToken();
+            mitra_id = String.valueOf(profil.getUserID());
+            Log.d("Hasilnya"," ID Mitra : "+mitra_id);
+        }
 
         tvAlamat = (TextView) findViewById(R.id.textViewAlamat);
         tvNama = (TextView) findViewById(R.id.textViewNama);
@@ -99,12 +112,32 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
         btPesanan = (Button) findViewById(R.id.btPesanan);
         btbtAmbilPesanan = (Button) findViewById(R.id.btAmbilPesanan);
         btUbahStatus = (Button) findViewById(R.id.btUbahStatus);
+        tvJemput = (TextView) findViewById(R.id.textViewDetailWaktuJemput);
+        tvAntar = (TextView) findViewById(R.id.textViewDetailWaktuAntar);
 
         tvNama.setText(nama);
-        tvAlamat.setText(namaJalan+"\n"+alamat);
-        tvStatuss.setText(status);
-        tvAlamatDetail.setText(detail_lokasi);
+        tvAlamat.setText(alamat);
+        tvJemput.setText("Jemput : "+jemput+" "+waktu+" WIB");
+        tvAntar.setText("Antar : "+antar+" "+waktu+" WIB");
+        tvAlamatDetail.setText("Detail Lokasi :\n"+detail_lokasi);
 
+        if (statusDetail.equals("0")){
+            orderPesan = "Order belum dijemput";
+        }else if (statusDetail.equals("1")){
+            orderPesan = "Order Sedang Dijemput";
+        }else if (statusDetail.equals("2")){
+            orderPesan = "Order Dalam Proses Pencucian";
+        }else if (statusDetail.equals("3")){
+            orderPesan = "Order Sedang Diantar";
+        }else{
+            orderPesan = "Order Selesai";
+        }
+
+        if (status.equals("1")){
+            tvStatuss.setText("Londri Kiloan\n"+orderPesan);
+        }else {
+            tvStatuss.setText("Londri Satuan\n"+orderPesan);
+        }
         gps = new GPSTracker(OrderDetailTab.this);
 
         btHubungi.setOnClickListener(new View.OnClickListener() {
@@ -121,11 +154,13 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
                 Intent intent = new Intent(OrderDetailTab.this, NavigasiActivity.class);
                 intent.putExtra("currLat",gps.getLatitude());
                 intent.putExtra("currLng",gps.getLongitude());
-                intent.putExtra("endLat", startLat);
-                intent.putExtra("endLng", startLng);
+                intent.putExtra("endLat", Double.parseDouble(startLat));
+                intent.putExtra("endLng", Double.parseDouble(startLng));
                 intent.putExtra("namaUser",nama);
                 intent.putExtra("order_id",order_id);
                 startActivity(intent);
+
+                Log.d("LOKASI",gps.getLatitude()+","+gps.getLongitude()+"  "+startLat+","+startLng);
             }
         });
 
@@ -145,14 +180,29 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
         btbtAmbilPesanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ambilOrder();
+                if(!statusDetail.equals("1")){
+                    ambilOrder();
+                }else{
+                    Toast.makeText(OrderDetailTab.this, "Pesanan sudah diambil!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        btbtAmbilPesanan.setVisibility(View.GONE);
 
         btUbahStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (statusDetail.equals("0")){
+                    changeStatus("Menjemput Order","1");
+                }else if (statusDetail.equals("1")){
+                    changeStatus("Mencuci Order","2");
+                }else if (statusDetail.equals("2")){
+                    changeStatus("Mengantar Order","3");
+                }else if (statusDetail.equals("3")){
+                    changeStatus("Order selesai","4");
+                }else{
+                    changeStatus("Order Selesai","4");
+                }
             }
         });
 
@@ -182,9 +232,6 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
     private void ambilOrder() {
         loading = ProgressDialog.show(this,"Mohon Tunggu","Sedang memproses...",false,false);
 
-        for (Profil profil : valuesProfil){
-            token = profil.getToken();
-        }
 
         RequestQueue queue = Volley.newRequestQueue(OrderDetailTab.this);
         StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_CHANGE_ORDER_STATUS, new Response.Listener<String>() {
@@ -212,20 +259,17 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("kurir_id", String.valueOf(kurir_id));
-                params.put("mitra_id", String.valueOf(mitra_id));
-                params.put("order_id", order_id);
+                params.put("kurir_id", mitra_id);
+                params.put("mitra_id", mitra_id);
+                params.put("id", order_id);
                 return params;
             }
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 String bearer = "Bearer " + token;
-                Map<String, String> headersSys = super.getHeaders();
                 Map<String, String> headers = new HashMap<String, String>();
-                headersSys.remove("Authorization");
                 headers.put("Authorization", bearer);
-                headers.putAll(headersSys);
                 return headers;
             }
         };
@@ -237,35 +281,28 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
         queue.add(strReq);
     }
 
-    private void changeStatus() {
+    private void changeStatus(final String pesan, final String status) {
 
-        loading = ProgressDialog.show(this,"Mohon Tunggu","Sedang memuat...",false,false);
-
-        for (Profil profil : valuesProfil){
-            token = profil.getToken();
-        }
-
-        Intent ambilOrder = getIntent();
-        order_id = ambilOrder.getStringExtra("order_id");
-        kurir_id = String.valueOf(idkurir);
-        mitra_id = String.valueOf(idmitra);
+        loading = ProgressDialog.show(this,"Mohon Tunggu","Sedang memproses...",false,false);
 
         RequestQueue queue = Volley.newRequestQueue(OrderDetailTab.this);
-        StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_CHANGE_ORDER_STATUS, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_CHANGE_ORDER_STATUS_DETAIL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
+                Log.d("Hasilnya",""+response);
                 hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
-                        String message = jObj.getString("message");
+                        /*String message = jObj.getString("message");
                         Toast.makeText(OrderDetailTab.this, ""+message, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OrderDetailTab.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+                        Toast.makeText(OrderDetailTab.this, ""+pesan, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     Toast.makeText(OrderDetailTab.this, ""+e, Toast.LENGTH_SHORT).show();
@@ -285,7 +322,7 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("order_id",order_id);
-                params.put("kurir_id",kurir_id);
+                params.put("kurir_id",mitra_id);
                 params.put("mitra_id", mitra_id);
                 return params;
             }

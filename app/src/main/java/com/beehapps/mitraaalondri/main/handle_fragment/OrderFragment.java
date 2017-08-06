@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,6 +33,7 @@ import com.beehapps.mitraaalondri.database.DatabaseHandler;
 import com.beehapps.mitraaalondri.main.handle_fragment.handle_main.OrderDetail;
 import com.beehapps.mitraaalondri.main.handle_fragment.handle_main.OrderOnlineActivity;
 import com.beehapps.mitraaalondri.main.handle_fragment.handle_message.MessageActivity;
+import com.beehapps.mitraaalondri.main.handle_fragment.handle_order.OrderDetailTab;
 import com.beehapps.mitraaalondri.pojo.Message;
 import com.beehapps.mitraaalondri.pojo.Order;
 import com.beehapps.mitraaalondri.pojo.OrderFrag;
@@ -73,6 +77,23 @@ public class OrderFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        inflater.inflate(R.menu.refresh, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                makeJsonObjectRequest();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_order, container, false);
         //((MainActivity) getActivity()).setTitle("Bantuan");
@@ -91,7 +112,7 @@ public class OrderFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(getActivity(), OrderDetail.class);
+                Intent intent = new Intent(getActivity(), OrderDetailTab.class);
                 intent.putExtra("user_id",dataList.get(position).getUser_id());
                 intent.putExtra("nama",dataList.get(position).getNama_alias());
                 intent.putExtra("nama_jalan",dataList.get(position).getNama_jalan());
@@ -105,6 +126,12 @@ public class OrderFragment extends Fragment {
                 intent.putExtra("order_id",dataList.get(position).getIdOrder());
                 intent.putExtra("total_bayar",dataList.get(position).getTotalBayar());
                 intent.putExtra("berat",dataList.get(position).getBerat());
+                intent.putExtra("is_byitem",dataList.get(position).getIs_byitem());
+                intent.putExtra("status",dataList.get(position).getStatus());
+                intent.putExtra("statusDetail",dataList.get(position).getStatusDetail());
+                intent.putExtra("tanggalMulai",dataList.get(position).getTanggal_mulai());
+                intent.putExtra("tanggalAKhir",dataList.get(position).getTanggal_akhir());
+                intent.putExtra("waktu",dataList.get(position).getWaktu_mulai());
                 startActivity(intent);
             }
         });
@@ -114,6 +141,7 @@ public class OrderFragment extends Fragment {
 
     private void makeJsonObjectRequest() {
 
+        dataList.clear();
 
         for (Profil profil : valuesProfil) {
             token = profil.getToken();
@@ -121,10 +149,11 @@ public class OrderFragment extends Fragment {
         loading = ProgressDialog.show(getActivity(),"Mohon Tunggu","Sedang memuat...",false,false);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest strReq = new StringRequest(Request.Method.GET, APIConfig.API_GET_ORDER_ONLINE, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, APIConfig.API_GET_ORDER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
+                Log.d("RESPON","order "+response);
 
                 hideDialog();
                 try {
@@ -140,7 +169,8 @@ public class OrderFragment extends Fragment {
                                 String kurir_id = isi.getString("kurir_id");
                                 String mitra_id = isi.getString("mitra_id");
                                 String nama_jalan = isi.getString("nama_jalan");
-                                JSONObject users = isi.getJSONObject("users");
+                                String status = isi.getString("status");
+                                JSONObject users = isi.getJSONObject("detail");
                                 String nama_alias = users.getString("nama_alias");
                                 String phone_alias = users.getString("phone_alias");
                                 String invoice_number = users.getString("invoice_number");
@@ -155,13 +185,13 @@ public class OrderFragment extends Fragment {
                                 String waktu_mulai = users.getString("waktu_mulai");
                                 String waktu_akhir = users.getString("waktu_akhir");
                                 String is_byitem = users.getString("is_byitem");
-                                String status = isi.getString("status");
+                                String statusDetail = users.getString("status");
                                 String totalBayar = users.getString("total_harga");
                                 String lat = users.getString("latitude");
                                 String lng = users.getString("longitude");
                                 dataList.add(new OrderFrag(i+"", id, user_id, kurir_id, mitra_id, nama_jalan, nama_alias, phone_alias, invoice_number,
                                         total_harga, detail_lokasi, catatan, alamat, is_ekspress, tanggal_mulai, tanggal_akhir, waktu_mulai, waktu_akhir, is_byitem,
-                                        status, totalBayar, lat, lng,berat));
+                                        status, totalBayar, lat, lng,berat,statusDetail));
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();

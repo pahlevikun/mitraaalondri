@@ -55,7 +55,7 @@ public class MessageFragment extends Fragment {
 
     private ProgressDialog loading;
 
-    private String invoice, layanan, cek, token, selected;
+    private String invoice, layanan, cek, token, selected, namamitra;
     private LinearLayout linRiwayat;
     private MessageAdapter adapter;
 
@@ -69,6 +69,22 @@ public class MessageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        inflater.inflate(R.menu.refresh, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                makeJsonObjectRequest();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -104,17 +120,21 @@ public class MessageFragment extends Fragment {
 
     private void makeJsonObjectRequest() {
 
+        dataList.clear();
 
         for (Profil profil : valuesProfil) {
             token = profil.getToken();
+            namamitra = profil.getUsername();
         }
         loading = ProgressDialog.show(getActivity(),"Mohon Tunggu","Sedang memuat...",false,false);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest strReq = new StringRequest(Request.Method.GET, APIConfig.API_ORDER_V2, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, APIConfig.API_GET_ORDER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
+
+                Log.d("RESPON","message "+response);
 
                 hideDialog();
                 try {
@@ -128,12 +148,10 @@ public class MessageFragment extends Fragment {
                             String user_id = object.getString("user_id");
                             String kurir_id = object.getString("kurir_id");
                             String mitra_id = object.getString("mitra_id");
-                            JSONObject user = object.getJSONObject("user");
-                            String mitra = user.getString("name");
                             JSONObject detail = object.getJSONObject("detail");
                             String nama_alias = detail.getString("nama_alias");
                             String invoice_number = detail.getString("invoice_number");
-                            dataList.add(new Message(i+"",id,user_id,kurir_id,mitra_id,mitra,nama_alias,invoice_number));
+                            dataList.add(new Message(i+"",id,user_id,kurir_id,mitra_id,namamitra,nama_alias,invoice_number));
                         }
                     }
                 } catch (JSONException e) {

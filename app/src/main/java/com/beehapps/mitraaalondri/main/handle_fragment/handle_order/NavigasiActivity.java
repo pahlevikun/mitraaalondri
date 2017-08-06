@@ -19,6 +19,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
@@ -40,6 +41,8 @@ public class NavigasiActivity extends AppCompatActivity implements OnMapReadyCal
     private LatLng sourcePosition, destPosition;
     private Double currLat, currLng, endLat, endLng;
     private String namaAlias;
+    private Polyline polyline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,9 @@ public class NavigasiActivity extends AppCompatActivity implements OnMapReadyCal
         endLat = ambil.getDoubleExtra("endLat",0);
         endLng = ambil.getDoubleExtra("endLng",0);
         namaAlias = ambil.getStringExtra("namaAlias");
+
+
+        Log.d("LOKASI",currLat+","+currLng+"  "+endLat+","+endLng);
 
         destPosition = new LatLng(endLat,endLng);
         sourcePosition = new LatLng(currLat, currLng);
@@ -241,6 +247,12 @@ public class NavigasiActivity extends AppCompatActivity implements OnMapReadyCal
 
             // Drawing polyline in the Google Map for the i-th route
             mGoogleMap.addPolyline(lineOptions);
+            if(polyline!=null){
+                polyline.remove();
+                polyline = mGoogleMap.addPolyline(lineOptions);
+            }else{
+                polyline = mGoogleMap.addPolyline(lineOptions);
+            }
         }
     }
 

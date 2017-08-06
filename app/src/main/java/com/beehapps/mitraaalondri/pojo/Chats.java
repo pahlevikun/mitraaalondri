@@ -7,20 +7,22 @@ package com.beehapps.mitraaalondri.pojo;
 public class Chats {
 
     private String id;
-    private String name;
-    private String chat;
-    private String sender;
-    private String mitra;
+    private String sender_id;
+    private String receiver_id;
+    private String sender_name;
+    private String receiver_name;
+    private String content;
 
     public Chats(){
     }
 
-    public Chats(String id, String name, String chat, String sender, String mitra){
+    public Chats(String id, String sender_id, String receiver_id, String sender_name, String receiver_name, String content){
         this.id = id;
-        this.name = name;
-        this.chat = chat;
-        this.sender = sender;
-        this.mitra = mitra;
+        this.sender_id = sender_id;
+        this.receiver_id = receiver_id;
+        this.sender_name = sender_name;
+        this.receiver_name = receiver_name;
+        this.content = content;
     }
 
     public String getId() {
@@ -31,35 +33,43 @@ public class Chats {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSender_id() {
+        return sender_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSender_id(String sender_id) {
+        this.sender_id = sender_id;
     }
 
-    public String getChat() {
-        return chat;
+    public String getReceiver_id() {
+        return receiver_id;
     }
 
-    public void setChat(String chat) {
-        this.chat = chat;
+    public void setReceiver_id(String receiver_id) {
+        this.receiver_id = receiver_id;
     }
 
-    public String getSender() {
-        return sender;
+    public String getSender_name() {
+        return sender_name;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setSender_name(String sender_name) {
+        this.sender_name = sender_name;
     }
 
-    public String getMitra() {
-        return mitra;
+    public String getReceiver_name() {
+        return receiver_name;
     }
 
-    public void setMitra(String mitra) {
-        this.mitra = mitra;
+    public void setReceiver_name(String receiver_name) {
+        this.receiver_name = receiver_name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

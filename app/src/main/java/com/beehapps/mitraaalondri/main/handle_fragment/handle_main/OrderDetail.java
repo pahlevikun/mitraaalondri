@@ -72,6 +72,9 @@ public class OrderDetail extends AppCompatActivity {
         btTeirma = (Button) findViewById(R.id.buttonTerima);
         btTolak = (Button) findViewById(R.id.buttonTolak);
 
+        dataSource = new DatabaseHandler(OrderDetail.this);
+        valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
+
         Intent intent = getIntent();
         idOrder = intent.getStringExtra("idOrder");
         nama_jalan = intent.getStringExtra("nama_jalan");
@@ -102,7 +105,7 @@ public class OrderDetail extends AppCompatActivity {
             public void onClick(View view) {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(OrderDetail.this);
                 alert.setTitle("Peringatan");
-                alert.setMessage("Berikan alasan menolak");
+                alert.setMessage("Menerima pesanan?");
                 alert.setPositiveButton("Ya",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -165,6 +168,8 @@ public class OrderDetail extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
+
+                Log.d("RESPON","Terima/Tolak "+response);
 
                 hideDialog();
                 try {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -62,6 +63,9 @@ public class MessageActivity extends AppCompatActivity {
         btn_send_msg = (Button)findViewById(R.id.button);
         input_msg = (EditText)findViewById(R.id.editText);
 
+        dataSource = new DatabaseHandler(MessageActivity.this);
+        valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
+
         for (Profil profil : valuesProfil) {
             token = profil.getToken();
             idMitra = String.valueOf(profil.getUserID());
@@ -98,19 +102,24 @@ public class MessageActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
+                input_msg.setText("");
+                Log.d("RESPON","chat "+response);
 
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if(!error){
+                        valuesChat.clear();
                         JSONArray jArray = jObj.getJSONArray("data");
                         for (int i=0; i<jArray.length();i++){
                             JSONObject data = jArray.getJSONObject(i);
                             String id = data.getString("id");
                             String sender_id = data.getString("sender_id");
                             String receiver_id = data.getString("receiver_id");
+                            String sender_name = data.getString("sender_name");
+                            String receiver_name = data.getString("receiver_name");
                             String content = data.getString("content");
-                            valuesChat.add(new Chats(id,content,sender_id,receiver_id,""));
+                            valuesChat.add(new Chats(id,sender_id,receiver_id,sender_name,receiver_name,content));
                         }
                     }
                 } catch (JSONException e) {

@@ -67,16 +67,16 @@ public class ChatAdapter extends BaseAdapter {
 
         // getting movie data for the row
         Chats m = orderItems.get(position);
-        title.setText(m.getName());
-        chat.setText(m.getChat());
+        title.setText(m.getSender_name());
+        chat.setText(m.getContent());
 
         dataSource = new DatabaseHandler(activity);
         valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
         for (Profil profil : valuesProfil){
-            id = String.valueOf(profil.getUserID());
+            id = profil.getUsername();
         }
 
-        if(m.getSender().equals(id)){
+        if(m.getSender_name().equals(id)){
             viewLeft.setVisibility(View.GONE);
             viewRight.setVisibility(View.VISIBLE);
             linearLayout.setBackgroundResource(R.drawable.bg_chats_left);

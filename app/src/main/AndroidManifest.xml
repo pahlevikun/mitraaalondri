@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyB89suxgsS1e7qV1KG0KwdiZylSM0VNlpI" />
         <activity
             android:name=".main.SplashActivity"
             android:screenOrientation="portrait"
@@ -55,6 +65,7 @@
         <activity android:name=".main.handle_fragment.handle_order.OrderDetailTab"/>
         <activity android:name=".main.handle_fragment.handle_order.EditOrderActivity"/>
         <activity android:name=".main.handle_fragment.handle_order.NavigasiActivity"/>
+        <activity android:name=".main.handle_fragment.handle_message.MessageActivity"/>
     </application>
 
 </manifest>

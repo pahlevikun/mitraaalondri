@@ -2,9 +2,11 @@ package com.beehapps.mitraaalondri.main.handle_fragment.handle_order;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.beehapps.mitraaalondri.R;
 import com.beehapps.mitraaalondri.config.APIConfig;
 import com.beehapps.mitraaalondri.database.DatabaseHandler;
+import com.beehapps.mitraaalondri.main.MainActivity;
 import com.beehapps.mitraaalondri.main.handle_login.LoginActivity;
 import com.beehapps.mitraaalondri.pojo.Profil;
 
@@ -43,6 +46,7 @@ public class EditOrderActivity extends AppCompatActivity {
     private EditText editBerat;
     private Button btSetujuU;
     private LinearLayout linBerat;
+    private int hargaDasar, hargaAkhir;
 
     private ProgressDialog loading;
 
@@ -79,8 +83,10 @@ public class EditOrderActivity extends AppCompatActivity {
         order_id = ambil.getStringExtra("order_id");
         total_bayar = ambil.getStringExtra("total_bayar");
 
+        hargaDasar = Integer.parseInt(total_bayar) / Math.round(Float.valueOf(berat));
+
         tvBayar.setText("IDR "+total_bayar);
-        editBerat.setText(berat);
+        editBerat.setText(""+Math.round(Float.valueOf(berat)));
         tvNamaUser.setText(nama);
         tvAlamatUser.setText(alamat);
         if(berat.equals("0.00")){
@@ -96,7 +102,9 @@ public class EditOrderActivity extends AppCompatActivity {
         btSetujuU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makeJsonObjectRequest();
+                berat_baru = editBerat.getText().toString().trim();
+                hargaAkhir = Integer.parseInt(berat_baru) * hargaDasar;
+                change(order_id,berat_baru,hargaAkhir+"");
             }
         });
 
@@ -104,7 +112,9 @@ public class EditOrderActivity extends AppCompatActivity {
 
     private void makeJsonObjectRequest() {
         loading = ProgressDialog.show(this,"Mohon Tunggu","Sedang mengubah data...",false,false);
-        berat_baru = editBerat.getText().toString().trim();
+
+
+        Log.d("KIRIM",berat_baru+","+hargaAkhir+","+order_id);
 
         for (Profil profil : valuesProfil){
             token = profil.getToken();
@@ -152,11 +162,73 @@ public class EditOrderActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 String bearer = "Bearer " + token;
-                Map<String, String> headersSys = super.getHeaders();
-                Map<String, String> headers = new HashMap<String, String>();
-                headersSys.remove("Authorization");
+                Map<String, String> headers = new HashMap<String, String>();;
                 headers.put("Authorization", bearer);
-                headers.putAll(headersSys);
+                return headers;
+            }
+        };
+
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        strReq.setRetryPolicy(policy);
+        queue.add(strReq);
+    }
+
+    private void change(final String order_id, final String berat, final String harga) {
+        loading = ProgressDialog.show(this,"Mohon Tunggu","Sedang login...",false,false);
+
+
+        for (Profil profil : valuesProfil){
+            token = profil.getToken();
+        }
+        RequestQueue queue = Volley.newRequestQueue(EditOrderActivity.this);
+        StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_EDIT_ORDER, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                hideDialog();
+                Log.d("Hasilnya",""+response);
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    //Mulai parsing json untuk menampilkan order.
+                    if (!error) {
+                        String pesan = jObj.getString("message");
+                        Toast.makeText(EditOrderActivity.this, "Berhasil mengubah!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(EditOrderActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(EditOrderActivity.this, "Gagal mengubah order!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(EditOrderActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Hasilnya",""+error);
+                Toast.makeText(getApplicationContext(), "Gagal Terhubung ke Server", Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", order_id);
+                params.put("berat", berat);
+                params.put("total_harga", harga);
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String bearer = "Bearer " + token;
+                Map<String, String> headers = new HashMap<String, String>();;
+                headers.put("Authorization", bearer);
                 return headers;
             }
         };

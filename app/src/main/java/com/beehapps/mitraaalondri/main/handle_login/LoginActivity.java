@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (error.equals("false")) {
                         JSONObject created = jObj.getJSONObject("created");
                         token = jObj.getString("token");
-                        user_id = jObj.getInt("userid");
+                        user_id = jObj.getInt("mitraid");
                         username = jObj.getString("username");
                         mail = jObj.getString("email");
                         created_at = created.getString("date");
