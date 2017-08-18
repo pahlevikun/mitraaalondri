@@ -139,7 +139,7 @@ public class MessageActivity extends AppCompatActivity {
                             requestChat(order_id);
                         }
                     }
-                }, 800);
+                }, 3000);
             }
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {

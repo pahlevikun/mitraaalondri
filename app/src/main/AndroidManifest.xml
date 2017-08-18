@@ -19,6 +19,7 @@
         android:largeHeap="true"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
+        android:hardwareAccelerated="false"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden">
         <meta-data

@@ -112,6 +112,8 @@ public class MessageFragment extends Fragment {
                 intent.putExtra("idMitra",dataList.get(position).getIdMitra());
                 intent.putExtra("idUser",dataList.get(position).getIdUser());
                 intent.putExtra("invoice",dataList.get(position).getInvoice_number());
+                Log.d("PINDAH",dataList.get(position).getIdOrder()+" "+dataList.get(position).getIdMitra()+" "+
+                        dataList.get(position).getIdUser()+" "+dataList.get(position).getInvoice_number());
                 startActivity(intent);
             }
         });

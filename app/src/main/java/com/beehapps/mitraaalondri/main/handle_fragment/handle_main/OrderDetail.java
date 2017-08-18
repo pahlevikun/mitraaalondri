@@ -28,6 +28,8 @@ import com.android.volley.toolbox.Volley;
 import com.beehapps.mitraaalondri.R;
 import com.beehapps.mitraaalondri.config.APIConfig;
 import com.beehapps.mitraaalondri.database.DatabaseHandler;
+import com.beehapps.mitraaalondri.main.MainActivity;
+import com.beehapps.mitraaalondri.main.handle_login.LoginActivity;
 import com.beehapps.mitraaalondri.pojo.Order;
 import com.beehapps.mitraaalondri.pojo.Profil;
 
@@ -176,7 +178,10 @@ public class OrderDetail extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     JSONArray dataArray = jObj.getJSONArray("message");
                     Toast.makeText(OrderDetail.this, ""+dataArray, Toast.LENGTH_LONG).show();
-                    finish();
+                    Intent intent = new Intent(OrderDetail.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    OrderDetail.this.startActivity(intent);
+                    OrderDetail.this.finish();
                 } catch (JSONException e) {
                     Toast.makeText(OrderDetail.this, "" + e, Toast.LENGTH_SHORT).show();
                     Log.d("ERROR 2",""+e);
