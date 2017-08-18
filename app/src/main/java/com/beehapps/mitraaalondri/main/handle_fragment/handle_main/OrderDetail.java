@@ -174,12 +174,9 @@ public class OrderDetail extends AppCompatActivity {
                 hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        JSONArray dataArray = jObj.getJSONArray("message");
-                        Toast.makeText(OrderDetail.this, ""+dataArray, Toast.LENGTH_LONG).show();
-                        finish();
-                    }
+                    JSONArray dataArray = jObj.getJSONArray("message");
+                    Toast.makeText(OrderDetail.this, ""+dataArray, Toast.LENGTH_LONG).show();
+                    finish();
                 } catch (JSONException e) {
                     Toast.makeText(OrderDetail.this, "" + e, Toast.LENGTH_SHORT).show();
                     Log.d("ERROR 2",""+e);
