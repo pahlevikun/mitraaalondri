@@ -111,6 +111,7 @@ public class MessageFragment extends Fragment {
                 intent.putExtra("idOrder",dataList.get(position).getIdOrder());
                 intent.putExtra("idMitra",dataList.get(position).getIdMitra());
                 intent.putExtra("idUser",dataList.get(position).getIdUser());
+                intent.putExtra("invoice",dataList.get(position).getInvoice_number());
                 startActivity(intent);
             }
         });
@@ -156,6 +157,11 @@ public class MessageFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "" + e, Toast.LENGTH_SHORT).show();
+                }
+                if(dataList.size()!=0){
+                    linRiwayat.setVisibility(View.GONE);
+                }else{
+                    linRiwayat.setVisibility(View.VISIBLE);
                 }
                 adapter.notifyDataSetChanged();
             }

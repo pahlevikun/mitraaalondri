@@ -1,5 +1,6 @@
 package com.beehapps.mitraaalondri.main.handle_fragment.handle_message;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import com.beehapps.mitraaalondri.adapter.ChatAdapter;
 import com.beehapps.mitraaalondri.config.APIConfig;
 import com.beehapps.mitraaalondri.database.DatabaseHandler;
 import com.beehapps.mitraaalondri.pojo.Chats;
+import com.beehapps.mitraaalondri.pojo.Message;
 import com.beehapps.mitraaalondri.pojo.Profil;
 
 import org.json.JSONArray;
@@ -47,6 +49,8 @@ public class MessageActivity extends AppCompatActivity {
     private ListView listView;
     private ChatAdapter adapter;
     private String token, idOrder,idMitra,idUser;
+    private boolean pesanKirim = true;
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class MessageActivity extends AppCompatActivity {
         idOrder = intent.getStringExtra("idOrder");
         idMitra = intent.getStringExtra("idMitra");
         idUser = intent.getStringExtra("idUser");
+        setTitle(intent.getStringExtra("invoice")+"");
         requestChat(idOrder);
 
         adapter = new ChatAdapter(MessageActivity.this, valuesChat);
@@ -89,6 +94,7 @@ public class MessageActivity extends AppCompatActivity {
                 if(chat.isEmpty()){
                     Toast.makeText(MessageActivity.this, "Silahkan isi dengan benar!", Toast.LENGTH_SHORT).show();
                 }else {
+                    pesanKirim = false;
                     sendChat(idOrder,idUser,chat);
                 }
             }
@@ -102,7 +108,6 @@ public class MessageActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                input_msg.setText("");
                 Log.d("RESPON","chat "+response);
 
                 try {
@@ -130,9 +135,11 @@ public class MessageActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Thread() {
                     @Override
                     public void run() {
-                        requestChat(order_id);
+                        if(pesanKirim){
+                            requestChat(order_id);
+                        }
                     }
-                }, 1000);
+                }, 800);
             }
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
@@ -155,7 +162,7 @@ public class MessageActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        int socketTimeout = 50000; // 40 seconds. You can change it
+        int socketTimeout = 10000; // 40 seconds. You can change it
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
@@ -164,6 +171,8 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void sendChat(final String order_id, final String user_id, final String content){
+        loading = ProgressDialog.show(MessageActivity.this,"Mohon Tunggu","Sedang mengirim pesan...",false,false);
+
         RequestQueue queue = Volley.newRequestQueue(MessageActivity.this);
         StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_CHAT_SEND, new Response.Listener<String>() {
 
@@ -172,13 +181,20 @@ public class MessageActivity extends AppCompatActivity {
 
                 try {
                     JSONObject jObj = new JSONObject(response);
+                    pesanKirim = true;
+                    input_msg.setText("");
+                    requestChat(idOrder);
+                    hideDialog();
                 } catch (JSONException e) {
+                    hideDialog();
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "JSON Error : " + e.getMessage(), Toast.LENGTH_LONG).show();
+
                 }
             }
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                hideDialog();
                 Toast.makeText(getApplicationContext(), "Gagal Terhubung ke Server", Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -206,6 +222,11 @@ public class MessageActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         strReq.setRetryPolicy(policy);
         queue.add(strReq);
+    }
+
+    private void hideDialog() {
+        if (loading.isShowing())
+            loading.dismiss();
     }
 
     @Override

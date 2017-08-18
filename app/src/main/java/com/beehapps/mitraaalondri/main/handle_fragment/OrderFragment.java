@@ -2,6 +2,7 @@ package com.beehapps.mitraaalondri.main.handle_fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -108,31 +109,37 @@ public class OrderFragment extends Fragment {
         lv.setAdapter(adapter);
 
         makeJsonObjectRequest();
+        final LocationManager manager = (LocationManager) getContext().getSystemService(getActivity().LOCATION_SERVICE);
+
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(getActivity(), OrderDetailTab.class);
-                intent.putExtra("user_id",dataList.get(position).getUser_id());
-                intent.putExtra("nama",dataList.get(position).getNama_alias());
-                intent.putExtra("nama_jalan",dataList.get(position).getNama_jalan());
-                intent.putExtra("alamat",dataList.get(position).getAlamat());
-                intent.putExtra("detail_lokasi",dataList.get(position).getDetail_lokasi());
-                intent.putExtra("invoice",dataList.get(position).getInvoice_number());
-                intent.putExtra("status",dataList.get(position).getStatus());
-                intent.putExtra("start_lat",dataList.get(position).getLat());
-                intent.putExtra("start_lng",dataList.get(position).getLng());
-                intent.putExtra("phone",dataList.get(position).getPhone_alias());
-                intent.putExtra("order_id",dataList.get(position).getIdOrder());
-                intent.putExtra("total_bayar",dataList.get(position).getTotalBayar());
-                intent.putExtra("berat",dataList.get(position).getBerat());
-                intent.putExtra("is_byitem",dataList.get(position).getIs_byitem());
-                intent.putExtra("status",dataList.get(position).getStatus());
-                intent.putExtra("statusDetail",dataList.get(position).getStatusDetail());
-                intent.putExtra("tanggalMulai",dataList.get(position).getTanggal_mulai());
-                intent.putExtra("tanggalAKhir",dataList.get(position).getTanggal_akhir());
-                intent.putExtra("waktu",dataList.get(position).getWaktu_mulai());
-                startActivity(intent);
+                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Toast.makeText(getActivity(), "Turn on GPS!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getActivity(), OrderDetailTab.class);
+                    intent.putExtra("user_id", dataList.get(position).getUser_id());
+                    intent.putExtra("nama", dataList.get(position).getNama_alias());
+                    intent.putExtra("nama_jalan", dataList.get(position).getNama_jalan());
+                    intent.putExtra("alamat", dataList.get(position).getAlamat());
+                    intent.putExtra("detail_lokasi", dataList.get(position).getDetail_lokasi());
+                    intent.putExtra("invoice", dataList.get(position).getInvoice_number());
+                    intent.putExtra("status", dataList.get(position).getStatus());
+                    intent.putExtra("start_lat", dataList.get(position).getLat());
+                    intent.putExtra("start_lng", dataList.get(position).getLng());
+                    intent.putExtra("phone", dataList.get(position).getPhone_alias());
+                    intent.putExtra("order_id", dataList.get(position).getIdOrder());
+                    intent.putExtra("total_bayar", dataList.get(position).getTotalBayar());
+                    intent.putExtra("berat", dataList.get(position).getBerat());
+                    intent.putExtra("is_byitem", dataList.get(position).getIs_byitem());
+                    intent.putExtra("status", dataList.get(position).getStatus());
+                    intent.putExtra("statusDetail", dataList.get(position).getStatusDetail());
+                    intent.putExtra("tanggalMulai", dataList.get(position).getTanggal_mulai());
+                    intent.putExtra("tanggalAKhir", dataList.get(position).getTanggal_akhir());
+                    intent.putExtra("waktu", dataList.get(position).getWaktu_mulai());
+                    startActivity(intent);
+                }
             }
         });
 
@@ -146,14 +153,14 @@ public class OrderFragment extends Fragment {
         for (Profil profil : valuesProfil) {
             token = profil.getToken();
         }
-        loading = ProgressDialog.show(getActivity(),"Mohon Tunggu","Sedang memuat...",false,false);
+        loading = ProgressDialog.show(getActivity(), "Mohon Tunggu", "Sedang memuat...", false, false);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.GET, APIConfig.API_GET_ORDER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                Log.d("RESPON","order "+response);
+                Log.d("RESPON", "order " + response);
 
                 hideDialog();
                 try {
@@ -189,18 +196,18 @@ public class OrderFragment extends Fragment {
                                 String totalBayar = users.getString("total_harga");
                                 String lat = users.getString("latitude");
                                 String lng = users.getString("longitude");
-                                dataList.add(new OrderFrag(i+"", id, user_id, kurir_id, mitra_id, nama_jalan, nama_alias, phone_alias, invoice_number,
+                                dataList.add(new OrderFrag(i + "", id, user_id, kurir_id, mitra_id, nama_jalan, nama_alias, phone_alias, invoice_number,
                                         total_harga, detail_lokasi, catatan, alamat, is_ekspress, tanggal_mulai, tanggal_akhir, waktu_mulai, waktu_akhir, is_byitem,
-                                        status, totalBayar, lat, lng,berat,statusDetail));
+                                        status, totalBayar, lat, lng, berat, statusDetail));
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
-                            Log.d("ERROR 1",""+e);
+                            Log.d("ERROR 1", "" + e);
                         }
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "" + e, Toast.LENGTH_SHORT).show();
-                    Log.d("ERROR 2",""+e);
+                    Log.d("ERROR 2", "" + e);
                 }
                 adapter.notifyDataSetChanged();
             }

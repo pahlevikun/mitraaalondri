@@ -187,7 +187,7 @@ public class OrderDetailTab extends AppCompatActivity implements OnMapReadyCallb
                 }
             }
         });
-        btbtAmbilPesanan.setVisibility(View.GONE);
+        //btbtAmbilPesanan.setVisibility(View.GONE);
 
         btUbahStatus.setOnClickListener(new View.OnClickListener() {
             @Override
