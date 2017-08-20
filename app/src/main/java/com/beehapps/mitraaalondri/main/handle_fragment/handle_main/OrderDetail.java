@@ -176,7 +176,7 @@ public class OrderDetail extends AppCompatActivity {
                 hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    JSONArray dataArray = jObj.getJSONArray("message");
+                    String dataArray = jObj.getString("message");
                     Toast.makeText(OrderDetail.this, ""+dataArray, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(OrderDetail.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
